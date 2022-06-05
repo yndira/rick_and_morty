@@ -4,13 +4,24 @@ import 'package:rick_and_morty/application/character_list_bloc.dart';
 
 import '../domain/character.dart';
 
-class Filters extends StatelessWidget {
+class Filters extends StatefulWidget {
   const Filters({Key? key}) : super(key: key);
+
+  @override
+  State<Filters> createState() => _FiltersState();
+}
+
+class _FiltersState extends State<Filters> {
+  final TextEditingController _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterListBloc, CharacterListState>(
       builder: (context, state) {
+        if (state.name == null) {
+          _textController.clear();
+        }
+
         return Container(
           color: Theme.of(context).colorScheme.primary,
           child: Padding(
@@ -31,7 +42,8 @@ class Filters extends StatelessWidget {
   Expanded _buildNameFilter(BuildContext context, CharacterListState state) {
     return Expanded(
       child: TextFormField(
-        initialValue: state.name,
+        // initialValue: state.name ?? "Pepe",
+        controller: _textController,
         cursorColor: Colors.white,
         decoration: const InputDecoration(
           hintText: "Buscar personaje...",
@@ -71,12 +83,46 @@ class Filters extends StatelessWidget {
       icon: const Icon(Icons.list),
       itemBuilder: (context) {
         return [
-          const PopupMenuItem(
-            child: Text("Estado", style: TextStyle(color: Colors.black)),
+          PopupMenuItem(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Estado", style: TextStyle(color: Colors.black)),
+                IconButton(
+                  onPressed: () {
+                    context
+                        .read<CharacterListBloc>()
+                        .add(const CharacterListEvent.statusChecked(null));
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                )
+              ],
+            ),
           ),
           ..._buildStatusPopupMenuItem(context, state),
-          const PopupMenuItem(
-            child: Text("Género", style: TextStyle(color: Colors.black)),
+          PopupMenuItem(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Género", style: TextStyle(color: Colors.black)),
+                IconButton(
+                  onPressed: () {
+                    context
+                        .read<CharacterListBloc>()
+                        .add(const CharacterListEvent.genderChecked(null));
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                )
+              ],
+            ),
           ),
           ..._buildGenderPopupMenuItem(context, state),
         ];

@@ -12,7 +12,7 @@ class CharacterRepository {
     try {
       final jsonResult = await api.getMap(url);
       return CharacterResponse.fromJson(jsonResult);
-    } on Exception /*catch (ex, stack)*/ {
+    } on Exception {
       rethrow;
     }
   }

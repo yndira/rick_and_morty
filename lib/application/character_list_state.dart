@@ -4,7 +4,6 @@ enum BlocStatus { initial, loading, success, failure }
 
 @freezed
 class CharacterListState with _$CharacterListState {
-
   const factory CharacterListState({
     required InfoResponse info,
     required List<Character> characters,
@@ -15,6 +14,7 @@ class CharacterListState with _$CharacterListState {
     String? name,
     Status? status,
     Gender? gender,
+    String? error,
   }) = _CharacterState;
 
   factory CharacterListState.initial() => CharacterListState(

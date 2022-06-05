@@ -13,11 +13,6 @@ void main() {
   BlocOverrides.runZoned(
     () {
       runApp(const MyApp());
-      // runZonedGuarded(() {
-      //   runApp(const MyApp());
-      // }, (error, stackTrace) {
-      //   debugPrint('EXCEPCION NO CAPTURADA: $error');
-      // });
     },
     blocObserver: SimpleBlocObserver(),
   );
@@ -46,16 +41,16 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("**************** en MultiBlocProvider");
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<CharacterListBloc>(
-          create: (context) => CharacterListBloc(MyApp.characterRepo)
-            ..add(const CharacterListEvent.characterFetched()),
+          create: (context) => CharacterListBloc(
+            MyApp.characterRepo,
+            MyApp.episodeRepo,
+          )..add(const CharacterListEvent.characterFetched()),
         ),
       ],
-      child: const CharacterList(title: 'Flutter Demo Home Page'),
+      child: const CharacterList(),
     );
   }
 }

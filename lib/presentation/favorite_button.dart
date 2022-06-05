@@ -16,7 +16,7 @@ class FavoriteButton extends StatelessWidget {
       shape: const CircleBorder(),
       onPressed: onPressed,
       child: Padding(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Icon(
           Icons.star,
           color: disable ? Colors.grey : Colors.yellow,

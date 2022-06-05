@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/presentation/styles.dart';
 
 import '../application/character_list_bloc.dart';
+import 'bottom_app.dart';
 import 'character_item.dart';
 import 'character_list_empty.dart';
 import 'favorite_button.dart';
 import 'filters.dart';
 
 class CharacterList extends StatefulWidget {
-  const CharacterList({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const CharacterList({Key? key}) : super(key: key);
 
   @override
   State<CharacterList> createState() => _CharacterListState();
@@ -29,8 +29,17 @@ class _CharacterListState extends State<CharacterList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CharacterListBloc, CharacterListState>(
-        builder: (context, state) {
+    return BlocConsumer<CharacterListBloc, CharacterListState>(
+        listener: (context, state) {
+      if (state.blocStatus == BlocStatus.failure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+                "Parece que has perdido tu viaje. \n Ha ocurrido un error."),
+          ),
+        );
+      }
+    }, builder: (context, state) {
       return Scaffold(
         body: _buildCustomScrollView(state, context),
       );
@@ -46,6 +55,7 @@ class _CharacterListState extends State<CharacterList> {
           pinned: true,
           expandedHeight: 250.0,
           flexibleSpace: FlexibleSpaceBar(
+            expandedTitleScale: 1,
             titlePadding: EdgeInsets.zero,
             title: const Filters(),
             background: Container(
@@ -65,49 +75,42 @@ class _CharacterListState extends State<CharacterList> {
           ),
         ),
         SliverToBoxAdapter(
-          child: SizedBox(
-            child: _buildShowFavoritesButton(context, state),
-          ),
+          child: _buildShowFavoritesButton(context, state),
         ),
         _buildList(state),
-        if (state.status == BlocStatus.loading &&
+        if (state.blocStatus == BlocStatus.loading &&
             state.characters.isNotEmpty &&
             !state.hasReachedMax)
+          _buildCircularProgress(state),
+        if (state.blocStatus != BlocStatus.loading &&
+            (state.hasReachedMax || state.characters.isEmpty))
           const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 20,
-              child: Center(child: CircularProgressIndicator()),
-            ),
-          ),
-        if (state.status != BlocStatus.loading && state.hasReachedMax)
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 100,
-              child: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/bottom.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
+            child: BottomApp(),
           ),
       ],
     );
   }
 
+  Widget _buildCircularProgress(CharacterListState state) {
+    return const SliverFillRemaining(
+      hasScrollBody: false,
+      child: Center(
+          child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: CircularProgressIndicator(),
+      )),
+    );
+  }
+
   Widget _buildList(CharacterListState state) {
-    if (state.status == BlocStatus.initial ||
-        state.status == BlocStatus.loading && state.characters.isEmpty) {
-      return const SliverToBoxAdapter(
-        child: SizedBox(
-          child: Center(child: CircularProgressIndicator()),
-        ),
-      );
+    if ((state.blocStatus == BlocStatus.initial ||
+            state.blocStatus == BlocStatus.loading) &&
+        state.characters.isEmpty) {
+      return _buildCircularProgress(state);
     } else {
       if (state.characters.isEmpty) {
-        return SliverToBoxAdapter(
+        return const SliverFillRemaining(
+          hasScrollBody: false,
           child: CharacterListEmpty(),
         );
       } else {
@@ -124,6 +127,7 @@ class _CharacterListState extends State<CharacterList> {
         (BuildContext context, int index) {
           return CharacterItem(
             character: characters[index],
+            show: true,
           );
         },
         childCount: characters.length,
@@ -145,7 +149,7 @@ class _CharacterListState extends State<CharacterList> {
             onPressed: () => state.showFavorites
                 ? _characterBloc.add(const CharacterListEvent.favoritesShowed())
                 : _characterBloc.add(const CharacterListEvent.favoritesHid()),
-            disable: !state.showFavorites,
+            disable: state.showFavorites,
           ),
         ],
       ),
@@ -169,7 +173,6 @@ class _CharacterListState extends State<CharacterList> {
   bool get _isBottom {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;
-    final double height = MediaQuery.of(context).size.height;
     final currentScroll = _scrollController.offset;
     return currentScroll >= (maxScroll * 0.90);
   }

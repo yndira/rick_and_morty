@@ -20,33 +20,36 @@ mixin _$CharacterListEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() characterFetched,
     required TResult Function(String name) nameChanged,
-    required TResult Function(Status status) statusChecked,
-    required TResult Function(Gender gender) genderChecked,
+    required TResult Function(Status? status) statusChecked,
+    required TResult Function(Gender? gender) genderChecked,
     required TResult Function() favoritesShowed,
     required TResult Function() favoritesHid,
     required TResult Function(Character character) favoriteToggled,
+    required TResult Function() filtersDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +62,7 @@ mixin _$CharacterListEvent {
     required TResult Function(FavoritesShowed value) favoritesShowed,
     required TResult Function(FavoritesHid value) favoritesHid,
     required TResult Function(FavoriteToggled value) favoriteToggled,
+    required TResult Function(FiltersDeleted value) filtersDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +74,7 @@ mixin _$CharacterListEvent {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +86,7 @@ mixin _$CharacterListEvent {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,11 +152,12 @@ class _$CharacterFetched implements CharacterFetched {
   TResult when<TResult extends Object?>({
     required TResult Function() characterFetched,
     required TResult Function(String name) nameChanged,
-    required TResult Function(Status status) statusChecked,
-    required TResult Function(Gender gender) genderChecked,
+    required TResult Function(Status? status) statusChecked,
+    required TResult Function(Gender? gender) genderChecked,
     required TResult Function() favoritesShowed,
     required TResult Function() favoritesHid,
     required TResult Function(Character character) favoriteToggled,
+    required TResult Function() filtersDeleted,
   }) {
     return characterFetched();
   }
@@ -160,11 +167,12 @@ class _$CharacterFetched implements CharacterFetched {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
   }) {
     return characterFetched?.call();
   }
@@ -174,11 +182,12 @@ class _$CharacterFetched implements CharacterFetched {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
     required TResult orElse(),
   }) {
     if (characterFetched != null) {
@@ -197,6 +206,7 @@ class _$CharacterFetched implements CharacterFetched {
     required TResult Function(FavoritesShowed value) favoritesShowed,
     required TResult Function(FavoritesHid value) favoritesHid,
     required TResult Function(FavoriteToggled value) favoriteToggled,
+    required TResult Function(FiltersDeleted value) filtersDeleted,
   }) {
     return characterFetched(this);
   }
@@ -211,6 +221,7 @@ class _$CharacterFetched implements CharacterFetched {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
   }) {
     return characterFetched?.call(this);
   }
@@ -225,6 +236,7 @@ class _$CharacterFetched implements CharacterFetched {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
     required TResult orElse(),
   }) {
     if (characterFetched != null) {
@@ -305,11 +317,12 @@ class _$NameChanged implements NameChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() characterFetched,
     required TResult Function(String name) nameChanged,
-    required TResult Function(Status status) statusChecked,
-    required TResult Function(Gender gender) genderChecked,
+    required TResult Function(Status? status) statusChecked,
+    required TResult Function(Gender? gender) genderChecked,
     required TResult Function() favoritesShowed,
     required TResult Function() favoritesHid,
     required TResult Function(Character character) favoriteToggled,
+    required TResult Function() filtersDeleted,
   }) {
     return nameChanged(name);
   }
@@ -319,11 +332,12 @@ class _$NameChanged implements NameChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
   }) {
     return nameChanged?.call(name);
   }
@@ -333,11 +347,12 @@ class _$NameChanged implements NameChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
     required TResult orElse(),
   }) {
     if (nameChanged != null) {
@@ -356,6 +371,7 @@ class _$NameChanged implements NameChanged {
     required TResult Function(FavoritesShowed value) favoritesShowed,
     required TResult Function(FavoritesHid value) favoritesHid,
     required TResult Function(FavoriteToggled value) favoriteToggled,
+    required TResult Function(FiltersDeleted value) filtersDeleted,
   }) {
     return nameChanged(this);
   }
@@ -370,6 +386,7 @@ class _$NameChanged implements NameChanged {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
   }) {
     return nameChanged?.call(this);
   }
@@ -384,6 +401,7 @@ class _$NameChanged implements NameChanged {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
     required TResult orElse(),
   }) {
     if (nameChanged != null) {
@@ -407,7 +425,7 @@ abstract class _$$StatusCheckedCopyWith<$Res> {
   factory _$$StatusCheckedCopyWith(
           _$StatusChecked value, $Res Function(_$StatusChecked) then) =
       __$$StatusCheckedCopyWithImpl<$Res>;
-  $Res call({Status status});
+  $Res call({Status? status});
 }
 
 /// @nodoc
@@ -429,7 +447,7 @@ class __$$StatusCheckedCopyWithImpl<$Res>
       status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as Status?,
     ));
   }
 }
@@ -440,7 +458,7 @@ class _$StatusChecked implements StatusChecked {
   const _$StatusChecked(this.status);
 
   @override
-  final Status status;
+  final Status? status;
 
   @override
   String toString() {
@@ -469,11 +487,12 @@ class _$StatusChecked implements StatusChecked {
   TResult when<TResult extends Object?>({
     required TResult Function() characterFetched,
     required TResult Function(String name) nameChanged,
-    required TResult Function(Status status) statusChecked,
-    required TResult Function(Gender gender) genderChecked,
+    required TResult Function(Status? status) statusChecked,
+    required TResult Function(Gender? gender) genderChecked,
     required TResult Function() favoritesShowed,
     required TResult Function() favoritesHid,
     required TResult Function(Character character) favoriteToggled,
+    required TResult Function() filtersDeleted,
   }) {
     return statusChecked(status);
   }
@@ -483,11 +502,12 @@ class _$StatusChecked implements StatusChecked {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
   }) {
     return statusChecked?.call(status);
   }
@@ -497,11 +517,12 @@ class _$StatusChecked implements StatusChecked {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
     required TResult orElse(),
   }) {
     if (statusChecked != null) {
@@ -520,6 +541,7 @@ class _$StatusChecked implements StatusChecked {
     required TResult Function(FavoritesShowed value) favoritesShowed,
     required TResult Function(FavoritesHid value) favoritesHid,
     required TResult Function(FavoriteToggled value) favoriteToggled,
+    required TResult Function(FiltersDeleted value) filtersDeleted,
   }) {
     return statusChecked(this);
   }
@@ -534,6 +556,7 @@ class _$StatusChecked implements StatusChecked {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
   }) {
     return statusChecked?.call(this);
   }
@@ -548,6 +571,7 @@ class _$StatusChecked implements StatusChecked {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
     required TResult orElse(),
   }) {
     if (statusChecked != null) {
@@ -558,9 +582,9 @@ class _$StatusChecked implements StatusChecked {
 }
 
 abstract class StatusChecked implements CharacterListEvent {
-  const factory StatusChecked(final Status status) = _$StatusChecked;
+  const factory StatusChecked(final Status? status) = _$StatusChecked;
 
-  Status get status => throw _privateConstructorUsedError;
+  Status? get status => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$StatusCheckedCopyWith<_$StatusChecked> get copyWith =>
       throw _privateConstructorUsedError;
@@ -571,7 +595,7 @@ abstract class _$$GenderCheckedCopyWith<$Res> {
   factory _$$GenderCheckedCopyWith(
           _$GenderChecked value, $Res Function(_$GenderChecked) then) =
       __$$GenderCheckedCopyWithImpl<$Res>;
-  $Res call({Gender gender});
+  $Res call({Gender? gender});
 }
 
 /// @nodoc
@@ -593,7 +617,7 @@ class __$$GenderCheckedCopyWithImpl<$Res>
       gender == freezed
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as Gender,
+              as Gender?,
     ));
   }
 }
@@ -604,7 +628,7 @@ class _$GenderChecked implements GenderChecked {
   const _$GenderChecked(this.gender);
 
   @override
-  final Gender gender;
+  final Gender? gender;
 
   @override
   String toString() {
@@ -633,11 +657,12 @@ class _$GenderChecked implements GenderChecked {
   TResult when<TResult extends Object?>({
     required TResult Function() characterFetched,
     required TResult Function(String name) nameChanged,
-    required TResult Function(Status status) statusChecked,
-    required TResult Function(Gender gender) genderChecked,
+    required TResult Function(Status? status) statusChecked,
+    required TResult Function(Gender? gender) genderChecked,
     required TResult Function() favoritesShowed,
     required TResult Function() favoritesHid,
     required TResult Function(Character character) favoriteToggled,
+    required TResult Function() filtersDeleted,
   }) {
     return genderChecked(gender);
   }
@@ -647,11 +672,12 @@ class _$GenderChecked implements GenderChecked {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
   }) {
     return genderChecked?.call(gender);
   }
@@ -661,11 +687,12 @@ class _$GenderChecked implements GenderChecked {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
     required TResult orElse(),
   }) {
     if (genderChecked != null) {
@@ -684,6 +711,7 @@ class _$GenderChecked implements GenderChecked {
     required TResult Function(FavoritesShowed value) favoritesShowed,
     required TResult Function(FavoritesHid value) favoritesHid,
     required TResult Function(FavoriteToggled value) favoriteToggled,
+    required TResult Function(FiltersDeleted value) filtersDeleted,
   }) {
     return genderChecked(this);
   }
@@ -698,6 +726,7 @@ class _$GenderChecked implements GenderChecked {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
   }) {
     return genderChecked?.call(this);
   }
@@ -712,6 +741,7 @@ class _$GenderChecked implements GenderChecked {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
     required TResult orElse(),
   }) {
     if (genderChecked != null) {
@@ -722,9 +752,9 @@ class _$GenderChecked implements GenderChecked {
 }
 
 abstract class GenderChecked implements CharacterListEvent {
-  const factory GenderChecked(final Gender gender) = _$GenderChecked;
+  const factory GenderChecked(final Gender? gender) = _$GenderChecked;
 
-  Gender get gender => throw _privateConstructorUsedError;
+  Gender? get gender => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$GenderCheckedCopyWith<_$GenderChecked> get copyWith =>
       throw _privateConstructorUsedError;
@@ -773,11 +803,12 @@ class _$FavoritesShowed implements FavoritesShowed {
   TResult when<TResult extends Object?>({
     required TResult Function() characterFetched,
     required TResult Function(String name) nameChanged,
-    required TResult Function(Status status) statusChecked,
-    required TResult Function(Gender gender) genderChecked,
+    required TResult Function(Status? status) statusChecked,
+    required TResult Function(Gender? gender) genderChecked,
     required TResult Function() favoritesShowed,
     required TResult Function() favoritesHid,
     required TResult Function(Character character) favoriteToggled,
+    required TResult Function() filtersDeleted,
   }) {
     return favoritesShowed();
   }
@@ -787,11 +818,12 @@ class _$FavoritesShowed implements FavoritesShowed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
   }) {
     return favoritesShowed?.call();
   }
@@ -801,11 +833,12 @@ class _$FavoritesShowed implements FavoritesShowed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
     required TResult orElse(),
   }) {
     if (favoritesShowed != null) {
@@ -824,6 +857,7 @@ class _$FavoritesShowed implements FavoritesShowed {
     required TResult Function(FavoritesShowed value) favoritesShowed,
     required TResult Function(FavoritesHid value) favoritesHid,
     required TResult Function(FavoriteToggled value) favoriteToggled,
+    required TResult Function(FiltersDeleted value) filtersDeleted,
   }) {
     return favoritesShowed(this);
   }
@@ -838,6 +872,7 @@ class _$FavoritesShowed implements FavoritesShowed {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
   }) {
     return favoritesShowed?.call(this);
   }
@@ -852,6 +887,7 @@ class _$FavoritesShowed implements FavoritesShowed {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
     required TResult orElse(),
   }) {
     if (favoritesShowed != null) {
@@ -908,11 +944,12 @@ class _$FavoritesHid implements FavoritesHid {
   TResult when<TResult extends Object?>({
     required TResult Function() characterFetched,
     required TResult Function(String name) nameChanged,
-    required TResult Function(Status status) statusChecked,
-    required TResult Function(Gender gender) genderChecked,
+    required TResult Function(Status? status) statusChecked,
+    required TResult Function(Gender? gender) genderChecked,
     required TResult Function() favoritesShowed,
     required TResult Function() favoritesHid,
     required TResult Function(Character character) favoriteToggled,
+    required TResult Function() filtersDeleted,
   }) {
     return favoritesHid();
   }
@@ -922,11 +959,12 @@ class _$FavoritesHid implements FavoritesHid {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
   }) {
     return favoritesHid?.call();
   }
@@ -936,11 +974,12 @@ class _$FavoritesHid implements FavoritesHid {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
     required TResult orElse(),
   }) {
     if (favoritesHid != null) {
@@ -959,6 +998,7 @@ class _$FavoritesHid implements FavoritesHid {
     required TResult Function(FavoritesShowed value) favoritesShowed,
     required TResult Function(FavoritesHid value) favoritesHid,
     required TResult Function(FavoriteToggled value) favoriteToggled,
+    required TResult Function(FiltersDeleted value) filtersDeleted,
   }) {
     return favoritesHid(this);
   }
@@ -973,6 +1013,7 @@ class _$FavoritesHid implements FavoritesHid {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
   }) {
     return favoritesHid?.call(this);
   }
@@ -987,6 +1028,7 @@ class _$FavoritesHid implements FavoritesHid {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
     required TResult orElse(),
   }) {
     if (favoritesHid != null) {
@@ -1067,11 +1109,12 @@ class _$FavoriteToggled implements FavoriteToggled {
   TResult when<TResult extends Object?>({
     required TResult Function() characterFetched,
     required TResult Function(String name) nameChanged,
-    required TResult Function(Status status) statusChecked,
-    required TResult Function(Gender gender) genderChecked,
+    required TResult Function(Status? status) statusChecked,
+    required TResult Function(Gender? gender) genderChecked,
     required TResult Function() favoritesShowed,
     required TResult Function() favoritesHid,
     required TResult Function(Character character) favoriteToggled,
+    required TResult Function() filtersDeleted,
   }) {
     return favoriteToggled(character);
   }
@@ -1081,11 +1124,12 @@ class _$FavoriteToggled implements FavoriteToggled {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
   }) {
     return favoriteToggled?.call(character);
   }
@@ -1095,11 +1139,12 @@ class _$FavoriteToggled implements FavoriteToggled {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? characterFetched,
     TResult Function(String name)? nameChanged,
-    TResult Function(Status status)? statusChecked,
-    TResult Function(Gender gender)? genderChecked,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
     TResult Function()? favoritesShowed,
     TResult Function()? favoritesHid,
     TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
     required TResult orElse(),
   }) {
     if (favoriteToggled != null) {
@@ -1118,6 +1163,7 @@ class _$FavoriteToggled implements FavoriteToggled {
     required TResult Function(FavoritesShowed value) favoritesShowed,
     required TResult Function(FavoritesHid value) favoritesHid,
     required TResult Function(FavoriteToggled value) favoriteToggled,
+    required TResult Function(FiltersDeleted value) filtersDeleted,
   }) {
     return favoriteToggled(this);
   }
@@ -1132,6 +1178,7 @@ class _$FavoriteToggled implements FavoriteToggled {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
   }) {
     return favoriteToggled?.call(this);
   }
@@ -1146,6 +1193,7 @@ class _$FavoriteToggled implements FavoriteToggled {
     TResult Function(FavoritesShowed value)? favoritesShowed,
     TResult Function(FavoritesHid value)? favoritesHid,
     TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
     required TResult orElse(),
   }) {
     if (favoriteToggled != null) {
@@ -1165,6 +1213,147 @@ abstract class FavoriteToggled implements CharacterListEvent {
 }
 
 /// @nodoc
+abstract class _$$FiltersDeletedCopyWith<$Res> {
+  factory _$$FiltersDeletedCopyWith(
+          _$FiltersDeleted value, $Res Function(_$FiltersDeleted) then) =
+      __$$FiltersDeletedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FiltersDeletedCopyWithImpl<$Res>
+    extends _$CharacterListEventCopyWithImpl<$Res>
+    implements _$$FiltersDeletedCopyWith<$Res> {
+  __$$FiltersDeletedCopyWithImpl(
+      _$FiltersDeleted _value, $Res Function(_$FiltersDeleted) _then)
+      : super(_value, (v) => _then(v as _$FiltersDeleted));
+
+  @override
+  _$FiltersDeleted get _value => super._value as _$FiltersDeleted;
+}
+
+/// @nodoc
+
+class _$FiltersDeleted implements FiltersDeleted {
+  const _$FiltersDeleted();
+
+  @override
+  String toString() {
+    return 'CharacterListEvent.filtersDeleted()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FiltersDeleted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() characterFetched,
+    required TResult Function(String name) nameChanged,
+    required TResult Function(Status? status) statusChecked,
+    required TResult Function(Gender? gender) genderChecked,
+    required TResult Function() favoritesShowed,
+    required TResult Function() favoritesHid,
+    required TResult Function(Character character) favoriteToggled,
+    required TResult Function() filtersDeleted,
+  }) {
+    return filtersDeleted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? characterFetched,
+    TResult Function(String name)? nameChanged,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
+    TResult Function()? favoritesShowed,
+    TResult Function()? favoritesHid,
+    TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
+  }) {
+    return filtersDeleted?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? characterFetched,
+    TResult Function(String name)? nameChanged,
+    TResult Function(Status? status)? statusChecked,
+    TResult Function(Gender? gender)? genderChecked,
+    TResult Function()? favoritesShowed,
+    TResult Function()? favoritesHid,
+    TResult Function(Character character)? favoriteToggled,
+    TResult Function()? filtersDeleted,
+    required TResult orElse(),
+  }) {
+    if (filtersDeleted != null) {
+      return filtersDeleted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CharacterFetched value) characterFetched,
+    required TResult Function(NameChanged value) nameChanged,
+    required TResult Function(StatusChecked value) statusChecked,
+    required TResult Function(GenderChecked value) genderChecked,
+    required TResult Function(FavoritesShowed value) favoritesShowed,
+    required TResult Function(FavoritesHid value) favoritesHid,
+    required TResult Function(FavoriteToggled value) favoriteToggled,
+    required TResult Function(FiltersDeleted value) filtersDeleted,
+  }) {
+    return filtersDeleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(CharacterFetched value)? characterFetched,
+    TResult Function(NameChanged value)? nameChanged,
+    TResult Function(StatusChecked value)? statusChecked,
+    TResult Function(GenderChecked value)? genderChecked,
+    TResult Function(FavoritesShowed value)? favoritesShowed,
+    TResult Function(FavoritesHid value)? favoritesHid,
+    TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
+  }) {
+    return filtersDeleted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CharacterFetched value)? characterFetched,
+    TResult Function(NameChanged value)? nameChanged,
+    TResult Function(StatusChecked value)? statusChecked,
+    TResult Function(GenderChecked value)? genderChecked,
+    TResult Function(FavoritesShowed value)? favoritesShowed,
+    TResult Function(FavoritesHid value)? favoritesHid,
+    TResult Function(FavoriteToggled value)? favoriteToggled,
+    TResult Function(FiltersDeleted value)? filtersDeleted,
+    required TResult orElse(),
+  }) {
+    if (filtersDeleted != null) {
+      return filtersDeleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FiltersDeleted implements CharacterListEvent {
+  const factory FiltersDeleted() = _$FiltersDeleted;
+}
+
+/// @nodoc
 mixin _$CharacterListState {
   InfoResponse get info => throw _privateConstructorUsedError;
   List<Character> get characters => throw _privateConstructorUsedError;
@@ -1175,6 +1364,7 @@ mixin _$CharacterListState {
   String? get name => throw _privateConstructorUsedError;
   Status? get status => throw _privateConstructorUsedError;
   Gender? get gender => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CharacterListStateCopyWith<CharacterListState> get copyWith =>
@@ -1195,7 +1385,8 @@ abstract class $CharacterListStateCopyWith<$Res> {
       bool showFavorites,
       String? name,
       Status? status,
-      Gender? gender});
+      Gender? gender,
+      String? error});
 }
 
 /// @nodoc
@@ -1218,6 +1409,7 @@ class _$CharacterListStateCopyWithImpl<$Res>
     Object? name = freezed,
     Object? status = freezed,
     Object? gender = freezed,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       info: info == freezed
@@ -1256,6 +1448,10 @@ class _$CharacterListStateCopyWithImpl<$Res>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as Gender?,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1276,7 +1472,8 @@ abstract class _$$_CharacterStateCopyWith<$Res>
       bool showFavorites,
       String? name,
       Status? status,
-      Gender? gender});
+      Gender? gender,
+      String? error});
 }
 
 /// @nodoc
@@ -1301,6 +1498,7 @@ class __$$_CharacterStateCopyWithImpl<$Res>
     Object? name = freezed,
     Object? status = freezed,
     Object? gender = freezed,
+    Object? error = freezed,
   }) {
     return _then(_$_CharacterState(
       info: info == freezed
@@ -1339,6 +1537,10 @@ class __$$_CharacterStateCopyWithImpl<$Res>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as Gender?,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1355,7 +1557,8 @@ class _$_CharacterState implements _CharacterState {
       required this.showFavorites,
       this.name,
       this.status,
-      this.gender})
+      this.gender,
+      this.error})
       : _characters = characters,
         _charactersFavorites = charactersFavorites;
 
@@ -1387,10 +1590,12 @@ class _$_CharacterState implements _CharacterState {
   final Status? status;
   @override
   final Gender? gender;
+  @override
+  final String? error;
 
   @override
   String toString() {
-    return 'CharacterListState(info: $info, characters: $characters, charactersFavorites: $charactersFavorites, hasReachedMax: $hasReachedMax, blocStatus: $blocStatus, showFavorites: $showFavorites, name: $name, status: $status, gender: $gender)';
+    return 'CharacterListState(info: $info, characters: $characters, charactersFavorites: $charactersFavorites, hasReachedMax: $hasReachedMax, blocStatus: $blocStatus, showFavorites: $showFavorites, name: $name, status: $status, gender: $gender, error: $error)';
   }
 
   @override
@@ -1411,7 +1616,8 @@ class _$_CharacterState implements _CharacterState {
                 .equals(other.showFavorites, showFavorites) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.gender, gender));
+            const DeepCollectionEquality().equals(other.gender, gender) &&
+            const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
@@ -1425,7 +1631,8 @@ class _$_CharacterState implements _CharacterState {
       const DeepCollectionEquality().hash(showFavorites),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(gender));
+      const DeepCollectionEquality().hash(gender),
+      const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
@@ -1443,7 +1650,8 @@ abstract class _CharacterState implements CharacterListState {
       required final bool showFavorites,
       final String? name,
       final Status? status,
-      final Gender? gender}) = _$_CharacterState;
+      final Gender? gender,
+      final String? error}) = _$_CharacterState;
 
   @override
   InfoResponse get info => throw _privateConstructorUsedError;
@@ -1463,6 +1671,8 @@ abstract class _CharacterState implements CharacterListState {
   Status? get status => throw _privateConstructorUsedError;
   @override
   Gender? get gender => throw _privateConstructorUsedError;
+  @override
+  String? get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_CharacterStateCopyWith<_$_CharacterState> get copyWith =>

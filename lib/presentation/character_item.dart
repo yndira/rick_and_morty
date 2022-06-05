@@ -8,15 +8,17 @@ import 'package:rick_and_morty/presentation/styles.dart';
 
 class CharacterItem extends StatelessWidget {
   final Character character;
+  final bool show;
 
-  const CharacterItem({Key? key, required this.character}) : super(key: key);
+  const CharacterItem({Key? key, required this.character, required this.show})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () => {_onTap(context)},
+        onTap: () => show ? _onTap(context) : {},
         child: Card(
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
@@ -65,7 +67,10 @@ class CharacterItem extends StatelessWidget {
                     _buildCharacterTexts(
                         "Last know location", character.location.name),
                     _buildCharacterTexts(
-                        "First seen in", character.episodes.first),
+                        "First seen in",
+                        character.firtsEpisode == null
+                            ? ""
+                            : character.firtsEpisode!.name),
                   ],
                 ),
               )

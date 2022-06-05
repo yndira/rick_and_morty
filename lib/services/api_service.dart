@@ -3,26 +3,7 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
-import '../domain/character.dart';
-
 class ApiService {
-  Future<void> getCharacters() async {
-    print("estoy en getCharacters");
-
-    final request = http.Request(
-        "GET", Uri.parse("https://rickandmortyapi.com/api/character"));
-    final response = await request.send();
-
-    if (response.statusCode == 200) {
-      print('status 200');
-      final jsonString = await response.stream.bytesToString();
-      final xlsResponse = Character.listFromJsonMap(json.decode(jsonString));
-      xlsResponse;
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }
-  }
-
   Future<Map<String, dynamic>> getMap(String url) async {
     return (await _get(url)) as Map<String, dynamic>;
   }
@@ -39,6 +20,9 @@ class ApiService {
       if (response.statusCode == 200) {
         return json.decode(response.body);
       }
+      if (response.statusCode == 404) {
+        throw NotFoundException();
+      }
 
       throw Exception();
     } catch (e) {
@@ -46,4 +30,8 @@ class ApiService {
       rethrow;
     }
   }
+}
+
+class NotFoundException implements Exception {
+  NotFoundException();
 }

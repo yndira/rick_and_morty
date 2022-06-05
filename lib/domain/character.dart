@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import 'Episode.dart';
+
 class Character extends Equatable {
   final int id;
   final String name;
@@ -14,6 +16,7 @@ class Character extends Equatable {
   final String url;
   final DateTime created;
   bool favorite;
+  Episode? firtsEpisode;
 
   Character({
     required this.id,
@@ -29,6 +32,7 @@ class Character extends Equatable {
     required this.url,
     required this.created,
     this.favorite = false,
+    this.firtsEpisode,
   });
 
   factory Character.copy(Character object) {
