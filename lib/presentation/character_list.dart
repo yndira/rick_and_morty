@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty/presentation/styles.dart';
 
 import '../application/character_list_bloc.dart';
 import 'character_item.dart';
+import 'character_list_empty.dart';
 import 'favorite_button.dart';
 import 'filters.dart';
 
@@ -67,7 +69,7 @@ class _CharacterListState extends State<CharacterList> {
             child: _buildShowFavoritesButton(context, state),
           ),
         ),
-        _buildItems(state),
+        _buildList(state),
         if (state.status == BlocStatus.loading &&
             state.characters.isNotEmpty &&
             !state.hasReachedMax)
@@ -77,25 +79,25 @@ class _CharacterListState extends State<CharacterList> {
               child: Center(child: CircularProgressIndicator()),
             ),
           ),
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 100,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                image: DecorationImage(
-                  image: AssetImage("assets/images/bottom.png"),
-                  fit: BoxFit.cover,
+        if (state.status != BlocStatus.loading && state.hasReachedMax)
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 100,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/bottom.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
       ],
     );
   }
 
-  Widget _buildItems(CharacterListState state) {
+  Widget _buildList(CharacterListState state) {
     if (state.status == BlocStatus.initial ||
         state.status == BlocStatus.loading && state.characters.isEmpty) {
       return const SliverToBoxAdapter(
@@ -104,48 +106,29 @@ class _CharacterListState extends State<CharacterList> {
         ),
       );
     } else {
-      final characters =
-          state.showFavorites ? state.characters : state.charactersFavorites;
-      return SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
-            return CharacterItem(
-              character: characters[index],
-            );
-          },
-          childCount: characters.length,
-        ),
-      );
+      if (state.characters.isEmpty) {
+        return SliverToBoxAdapter(
+          child: CharacterListEmpty(),
+        );
+      } else {
+        return _buildItems(state);
+      }
     }
+  }
 
-    // if (state.status == BlocStatus.initial ||
-    //     state.status == BlocStatus.loading && state.characters.isEmpty) {
-    //   return const Center(child: CircularProgressIndicator());
-    // } else {
-    //   final characters =
-    //       state.showFavorites ? state.characters : state.charactersFavorites;
-    //   return Column(
-    //     mainAxisSize: MainAxisSize.min,
-    //     children: [
-    //       Flexible(
-    //         child: ListView.builder(
-    //           // controller: _scrollController,
-    //           shrinkWrap: true,
-    //           itemCount: characters.length,
-    //           itemBuilder: (context, index) {
-    //             return CharacterItem(
-    //               character: characters[index],
-    //             );
-    //           },
-    //         ),
-    //       ),
-    //       if (state.status == BlocStatus.loading &&
-    //           state.characters.isNotEmpty &&
-    //           !state.hasReachedMax)
-    //         const Center(child: CircularProgressIndicator())
-    //     ],
-    //   );
-    // }
+  SliverList _buildItems(CharacterListState state) {
+    final characters =
+        state.showFavorites ? state.characters : state.charactersFavorites;
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return CharacterItem(
+            character: characters[index],
+          );
+        },
+        childCount: characters.length,
+      ),
+    );
   }
 
   Padding _buildShowFavoritesButton(
@@ -154,7 +137,10 @@ class _CharacterListState extends State<CharacterList> {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          Text(state.showFavorites ? "Mostrar favoritos" : "Mostrar todos"),
+          Text(
+            "Mostrar favoritos",
+            style: regularMediumTextStyle.copyWith(fontSize: 18),
+          ),
           FavoriteButton(
             onPressed: () => state.showFavorites
                 ? _characterBloc.add(const CharacterListEvent.favoritesShowed())

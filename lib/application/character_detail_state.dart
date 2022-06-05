@@ -6,6 +6,7 @@ class CharacterDetailState with _$CharacterDetailState {
     required Character character,
     required List<Episode> episodes,
     required BlocStatus status,
+    required List<Character> interestingCharacters,
   }) = _CharacterDetailState;
 
   factory CharacterDetailState.initial(Character character) =>
@@ -13,5 +14,6 @@ class CharacterDetailState with _$CharacterDetailState {
         episodes: [],
         character: character,
         status: BlocStatus.initial,
+        interestingCharacters: [],
       );
 }

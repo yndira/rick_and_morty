@@ -31,6 +31,24 @@ class Character extends Equatable {
     this.favorite = false,
   });
 
+  factory Character.copy(Character object) {
+    return Character(
+      id: object.id,
+      name: object.name,
+      status: object.status,
+      species: object.species,
+      type: object.type,
+      gender: object.gender,
+      origin: object.origin,
+      location: object.location,
+      image: object.image,
+      episodes: object.episodes,
+      url: object.url,
+      created: object.created,
+      favorite: object.favorite,
+    );
+  }
+
   @override
   String toString() {
     return "$id - $name";
@@ -87,7 +105,6 @@ class Character extends Equatable {
       };
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         id,
         name,

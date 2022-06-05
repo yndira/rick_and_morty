@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/application/character_detail_cubit.dart';
+import 'package:rick_and_morty/application/character_list_bloc.dart';
 import 'package:rick_and_morty/domain/Episode.dart';
 import 'package:rick_and_morty/presentation/character_item.dart';
+import 'package:rick_and_morty/presentation/styles.dart';
 
 import '../domain/character.dart';
 import '../main.dart';
@@ -15,200 +17,155 @@ class CharacterDetailProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("BUILD CharacterDetailProvider");
-
     return BlocProvider<CharacterDetailCubit>(
-      create: (context) =>
-          CharacterDetailCubit(character, MyApp.episodeRepo)..loadEpisodes(),
+      create: (context) => CharacterDetailCubit(
+          character, MyApp.episodeRepo, MyApp.characterRepo)
+        ..load(),
       child: CharacterDetail(),
     );
   }
 }
 
 class CharacterDetail extends StatelessWidget {
-  final bodyPadding = 8.0;
-  final cardInfoPadding = 8.0;
-  double minSizeCard = 0;
+  const CharacterDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // return _buildBody(context);
-
-    print("BUILD CharacterDetail");
-
-    final width = MediaQuery.of(context).size.width;
-    print("WIDTH: ${width / 2 - bodyPadding - cardInfoPadding}");
-    minSizeCard = width / 2 - bodyPadding - cardInfoPadding;
-
-    return BlocBuilder<CharacterDetailCubit, CharacterDetailState>(
-      builder: (context, state) {
-        return _buildScaffold(context, state);
-        // return Scaffold(
-        //   appBar: AppBar(
-        //     toolbarHeight: 150,
-        //     // title: Text(
-        //     //   character.name,
-        //     // ),
-        //
-        //     flexibleSpace: Stack(
-        //       children: [
-        //         Positioned.fill(
-        //           child: Column(
-        //             children: [
-        //               Expanded(
-        //                 child: Container(
-        //                   alignment: Alignment.topCenter,
-        //                   decoration: const BoxDecoration(
-        //                     image: DecorationImage(
-        //                       image: AssetImage(
-        //                           "assets/images/background_detail.png"),
-        //                       fit: BoxFit.cover,
-        //                     ),
-        //                   ),
-        //                 ),
-        //               ),
-        //               Expanded(
-        //                 child: Container(
-        //                   height: 60,
-        //                   alignment: Alignment.topCenter,
-        //                   decoration: const BoxDecoration(
-        //                     color: Colors.purple,
-        //                   ),
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //         Positioned.fill(
-        //           child: Align(
-        //             alignment: Alignment.center,
-        //             child: CircleAvatar(
-        //               radius: 50,
-        //               backgroundColor: Colors.white,
-        //               backgroundImage: NetworkImage(state.character.image),
-        //             ),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //     backgroundColor: Colors.lightBlue,
-        //     elevation: 0,
-        //   ),
-        //   body: _buildBody(context, state),
-        // );
-      },
-    );
-  }
-
-  Widget _buildScaffold(BuildContext context, CharacterDetailState state) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Container(
-            color: Theme.of(context).primaryColor,
-            height: 300.0,
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  height: 150.0,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/background_detail.png"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 100.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 50,
-                        child: ClipRRect(
-                          child: Image(
-                            image: NetworkImage(state.character.image),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.circle,
-                            color: Colors.greenAccent,
-                            size: 10,
-                          ),
-                          Text(state.character.status.name),
-                        ],
-                      ),
-                      Text(
-                        state.character.name,
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        state.character.type,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                )
-              ],
+      body: CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(
+            delegate: CharacterHeaderAppBar(
+              expandedHeight: MediaQuery.of(context).size.height * 0.2,
+              urlImage:
+                  context.read<CharacterDetailCubit>().state.character.image,
+            ),
+            pinned: false,
+          ),
+          SliverAppBar(
+            automaticallyImplyLeading: true,
+            pinned: true,
+            expandedHeight: 100.0,
+            collapsedHeight: 100.0,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              expandedTitleScale: 1,
+              title: _buildCharacterHeader(context),
+              background: Container(),
             ),
           ),
-          Expanded(child: _buildBody(context, state)),
+          SliverToBoxAdapter(
+            child: _buildBody(context),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildBody(BuildContext context, CharacterDetailState state) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+  Widget _buildCharacterHeader(BuildContext context) {
+    final state = context.read<CharacterDetailCubit>().state;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Información"),
-            Wrap(
-              children: [
-                _buildInfo("Gender", state.character.gender.name),
-                _buildInfo("Origin", state.character.origin.name),
-                _buildInfo("Type", state.character.type),
-              ],
+            const Icon(
+              Icons.circle,
+              color: Colors.greenAccent,
+              size: 10,
             ),
-            const Divider(thickness: 1),
-            _buildInfoEpisodes(state),
-            const Divider(thickness: 1),
-            _buildPersonajesInteresantes(state),
+            const SizedBox(width: 5),
+            Text(
+              state.character.status.name.toUpperCase(),
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildInfoEpisodes(CharacterDetailState state) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Text("Episodios"),
-        Wrap(
-          children: [...state.episodes.map((e) => _buildInfoEpisode(e))],
+        const SizedBox(height: 8),
+        Text(
+          state.character.name,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          state.character.species.toUpperCase(),
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
     );
   }
 
-  Widget _buildInfo(String title, String text) {
+  Widget _buildBody(BuildContext context) {
+    return BlocBuilder<CharacterDetailCubit, CharacterDetailState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildInfoCharcater(context, state),
+              const Divider(thickness: 1),
+              if (state.status == BlocStatus.loading)
+                Center(child: CircularProgressIndicator()),
+              if (state.status != BlocStatus.loading) ...[
+                _buildInfoEpisodes(context, state),
+                const Divider(thickness: 1),
+                _buildPersonajesInteresantes(state),
+              ]
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildInfoCharcater(BuildContext context, CharacterDetailState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Text(
+          "Información",
+          style: sectionTextStyle,
+        ),
+        Wrap(
+          children: [
+            _buildInfo(context, "Gender", state.character.gender.name),
+            _buildInfo(context, "Origin", state.character.origin.name),
+            _buildInfo(context, "Type", state.character.type),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildInfoEpisodes(BuildContext context, CharacterDetailState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Text(
+          "Episodios",
+          style: sectionTextStyle,
+        ),
+        Wrap(
+          children: [
+            ...state.episodes.map((e) => _buildInfoEpisode(context, e))
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildInfo(BuildContext context, String title, String text) {
+    final width = MediaQuery.of(context).size.width / 2 - 12;
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minWidth: minSizeCard,
-        maxWidth: minSizeCard,
+        minWidth: width,
+        maxWidth: width,
       ),
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -228,21 +185,47 @@ class CharacterDetail extends StatelessWidget {
                   Icons.info,
                   color: Colors.grey,
                 ),
-                Text(title),
+                const SizedBox(width: 5),
+                Text(
+                  title,
+                  style: _titleInfoTextStyle(),
+                ),
               ],
             ),
-            Text(text)
+            const SizedBox(height: 5),
+            Text(
+              text,
+              style: _subtitleInfoTextStyle(),
+            )
           ],
         ),
       ),
     );
   }
 
-  Widget _buildInfoEpisode(Episode episode) {
+  TextStyle _subtitleInfoTextStyle() {
+    return const TextStyle(
+      color: Colors.black,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      fontFamily: "montserrat",
+    );
+  }
+
+  TextStyle _titleInfoTextStyle() {
+    return const TextStyle(
+      color: Colors.black,
+      fontSize: 12,
+      fontWeight: FontWeight.w300,
+      fontFamily: "montserrat",
+    );
+  }
+
+  Widget _buildInfoEpisode(BuildContext context, Episode episode) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minWidth: minSizeCard,
-        maxWidth: minSizeCard,
+        minWidth: MediaQuery.of(context).size.width / 2 - 12,
+        maxWidth: MediaQuery.of(context).size.width / 2 - 12,
       ),
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -252,12 +235,23 @@ class CharacterDetail extends StatelessWidget {
           border: Border.all(),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(episode.name),
-            Text(episode.episode),
-            Text(episode.airDate),
+            Text(
+              episode.name,
+              style: _titleInfoTextStyle(),
+            ),
+            const SizedBox(height: 3),
+            Text(
+              episode.episode,
+              style: _subtitleInfoTextStyle(),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              episode.airDate,
+              style: _titleInfoTextStyle(),
+            ),
           ],
         ),
       ),
@@ -268,14 +262,67 @@ class CharacterDetail extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text("Personajes interesantes"),
+        const Text(
+          "Personajes interesantes",
+          style: sectionTextStyle,
+        ),
         Wrap(
           children: [
-            ...state.episodes
-                .map((e) => CharacterItem(character: state.character))
+            ...state.interestingCharacters
+                .map((c) => CharacterItem(character: c))
           ],
         ),
       ],
     );
   }
+}
+
+class CharacterHeaderAppBar extends SliverPersistentHeaderDelegate {
+  final double expandedHeight;
+  final String urlImage;
+
+  CharacterHeaderAppBar({
+    required this.expandedHeight,
+    required this.urlImage,
+  });
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Stack(
+      fit: StackFit.expand,
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/background_item.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Positioned(
+            top: expandedHeight / 1.7 - shrinkOffset,
+            left: MediaQuery.of(context).size.width / 2 -
+                MediaQuery.of(context).size.width / 8,
+            child: CircleAvatar(
+              radius: MediaQuery.of(context).size.width / 7.5,
+              backgroundColor: Colors.white,
+              child: CircleAvatar(
+                radius: MediaQuery.of(context).size.width / 8,
+                backgroundImage: NetworkImage(urlImage),
+              ),
+            )),
+      ],
+    );
+  }
+
+  @override
+  double get maxExtent => expandedHeight;
+
+  @override
+  double get minExtent => kToolbarHeight;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 }

@@ -62,29 +62,6 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
       showFavorites: false,
       charactersFavorites: favorites,
     ));
-    // try {
-    //   emit(state.copyWith(status: BlocStatus.loading));
-    //
-    //   var nextUrl = state.info.next;
-    //
-    //   if (nextUrl != null) {
-    //     final response = await repo.getAll(nextUrl);
-    //     emit(state.copyWith(
-    //       characters: List.of(state.characters)..addAll(response),
-    //       hasReachedMax: true,
-    //       status: BlocStatus.success,
-    //     ));
-    //   } else {
-    //     emit(state.copyWith(
-    //       hasReachedMax: true,
-    //       status: BlocStatus.success,
-    //     ));
-    //   }
-    // } on Exception {
-    //   emit(state.copyWith(
-    //     status: BlocStatus.failure,
-    //   ));
-    // }
   }
 
   Future<void> _onFavoritesHid(FavoritesHid event, Emitter emit) async {
@@ -122,15 +99,13 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
   }
 
   Future<void> _onFavoriteToggled(FavoriteToggled event, Emitter emit) async {
-    final charactersCopy = List.of(state.characters);
+    final charactersCopy =
+        state.characters.map((e) => Character.copy(e)).toList();
     final character =
         charactersCopy.firstWhereOrNull((c) => c.id == event.character.id);
 
     if (character != null) {
       character.favorite = !character.favorite;
-
-      // charactersCopy.removeWhere((c) => c.id == character.id);
-      // charactersCopy.add(character);
 
       emit(state.copyWith(
         characters: charactersCopy,

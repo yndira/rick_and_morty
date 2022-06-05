@@ -4,7 +4,6 @@ enum BlocStatus { initial, loading, success, failure }
 
 @freezed
 class CharacterListState with _$CharacterListState {
-  static const favorites = [1, 2, 5, 20, 30];
 
   const factory CharacterListState({
     required InfoResponse info,

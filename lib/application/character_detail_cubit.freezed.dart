@@ -19,6 +19,8 @@ mixin _$CharacterDetailState {
   Character get character => throw _privateConstructorUsedError;
   List<Episode> get episodes => throw _privateConstructorUsedError;
   BlocStatus get status => throw _privateConstructorUsedError;
+  List<Character> get interestingCharacters =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CharacterDetailStateCopyWith<CharacterDetailState> get copyWith =>
@@ -30,7 +32,11 @@ abstract class $CharacterDetailStateCopyWith<$Res> {
   factory $CharacterDetailStateCopyWith(CharacterDetailState value,
           $Res Function(CharacterDetailState) then) =
       _$CharacterDetailStateCopyWithImpl<$Res>;
-  $Res call({Character character, List<Episode> episodes, BlocStatus status});
+  $Res call(
+      {Character character,
+      List<Episode> episodes,
+      BlocStatus status,
+      List<Character> interestingCharacters});
 }
 
 /// @nodoc
@@ -47,6 +53,7 @@ class _$CharacterDetailStateCopyWithImpl<$Res>
     Object? character = freezed,
     Object? episodes = freezed,
     Object? status = freezed,
+    Object? interestingCharacters = freezed,
   }) {
     return _then(_value.copyWith(
       character: character == freezed
@@ -61,6 +68,10 @@ class _$CharacterDetailStateCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as BlocStatus,
+      interestingCharacters: interestingCharacters == freezed
+          ? _value.interestingCharacters
+          : interestingCharacters // ignore: cast_nullable_to_non_nullable
+              as List<Character>,
     ));
   }
 }
@@ -72,7 +83,11 @@ abstract class _$$_CharacterDetailStateCopyWith<$Res>
           $Res Function(_$_CharacterDetailState) then) =
       __$$_CharacterDetailStateCopyWithImpl<$Res>;
   @override
-  $Res call({Character character, List<Episode> episodes, BlocStatus status});
+  $Res call(
+      {Character character,
+      List<Episode> episodes,
+      BlocStatus status,
+      List<Character> interestingCharacters});
 }
 
 /// @nodoc
@@ -91,6 +106,7 @@ class __$$_CharacterDetailStateCopyWithImpl<$Res>
     Object? character = freezed,
     Object? episodes = freezed,
     Object? status = freezed,
+    Object? interestingCharacters = freezed,
   }) {
     return _then(_$_CharacterDetailState(
       character: character == freezed
@@ -105,6 +121,10 @@ class __$$_CharacterDetailStateCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as BlocStatus,
+      interestingCharacters: interestingCharacters == freezed
+          ? _value._interestingCharacters
+          : interestingCharacters // ignore: cast_nullable_to_non_nullable
+              as List<Character>,
     ));
   }
 }
@@ -115,8 +135,10 @@ class _$_CharacterDetailState implements _CharacterDetailState {
   const _$_CharacterDetailState(
       {required this.character,
       required final List<Episode> episodes,
-      required this.status})
-      : _episodes = episodes;
+      required this.status,
+      required final List<Character> interestingCharacters})
+      : _episodes = episodes,
+        _interestingCharacters = interestingCharacters;
 
   @override
   final Character character;
@@ -129,10 +151,16 @@ class _$_CharacterDetailState implements _CharacterDetailState {
 
   @override
   final BlocStatus status;
+  final List<Character> _interestingCharacters;
+  @override
+  List<Character> get interestingCharacters {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_interestingCharacters);
+  }
 
   @override
   String toString() {
-    return 'CharacterDetailState(character: $character, episodes: $episodes, status: $status)';
+    return 'CharacterDetailState(character: $character, episodes: $episodes, status: $status, interestingCharacters: $interestingCharacters)';
   }
 
   @override
@@ -142,7 +170,9 @@ class _$_CharacterDetailState implements _CharacterDetailState {
             other is _$_CharacterDetailState &&
             const DeepCollectionEquality().equals(other.character, character) &&
             const DeepCollectionEquality().equals(other._episodes, _episodes) &&
-            const DeepCollectionEquality().equals(other.status, status));
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality()
+                .equals(other._interestingCharacters, _interestingCharacters));
   }
 
   @override
@@ -150,7 +180,8 @@ class _$_CharacterDetailState implements _CharacterDetailState {
       runtimeType,
       const DeepCollectionEquality().hash(character),
       const DeepCollectionEquality().hash(_episodes),
-      const DeepCollectionEquality().hash(status));
+      const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(_interestingCharacters));
 
   @JsonKey(ignore: true)
   @override
@@ -161,9 +192,11 @@ class _$_CharacterDetailState implements _CharacterDetailState {
 
 abstract class _CharacterDetailState implements CharacterDetailState {
   const factory _CharacterDetailState(
-      {required final Character character,
-      required final List<Episode> episodes,
-      required final BlocStatus status}) = _$_CharacterDetailState;
+          {required final Character character,
+          required final List<Episode> episodes,
+          required final BlocStatus status,
+          required final List<Character> interestingCharacters}) =
+      _$_CharacterDetailState;
 
   @override
   Character get character => throw _privateConstructorUsedError;
@@ -171,6 +204,9 @@ abstract class _CharacterDetailState implements CharacterDetailState {
   List<Episode> get episodes => throw _privateConstructorUsedError;
   @override
   BlocStatus get status => throw _privateConstructorUsedError;
+  @override
+  List<Character> get interestingCharacters =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_CharacterDetailStateCopyWith<_$_CharacterDetailState> get copyWith =>
