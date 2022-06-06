@@ -9,20 +9,12 @@ class CharacterRepository {
   CharacterRepository(this.api);
 
   Future<CharacterResponse> getAllWithInfo(String url) async {
-    try {
-      final jsonResult = await api.getMap(url);
-      return CharacterResponse.fromJson(jsonResult);
-    } on Exception {
-      rethrow;
-    }
+    final jsonResult = await api.getMap(url);
+    return CharacterResponse.fromJson(jsonResult);
   }
 
   Future<List<Character>> getAll(String url) async {
-    try {
-      final jsonResult = await api.getList(url);
-      return Character.listFromJsonList(jsonResult);
-    } on Exception {
-      rethrow;
-    }
+    final jsonResult = await api.getList(url);
+    return Character.listFromJsonList(jsonResult);
   }
 }

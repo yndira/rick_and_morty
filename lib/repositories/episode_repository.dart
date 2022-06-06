@@ -10,29 +10,12 @@ class EpisodeRepository {
   EpisodeRepository(this.api);
 
   Future<EpisodeResponse> getAll(String url) async {
-    try {
-      final jsonResult = await api.getMap(url);
-      return EpisodeResponse.fromJson(jsonResult);
-    } on Exception {
-      rethrow;
-    }
+    final jsonResult = await api.getMap(url);
+    return EpisodeResponse.fromJson(jsonResult);
   }
 
   Future<Episode> get(String url) async {
-    try {
-      final jsonResult = await api.getMap(url);
-      return Episode.fromJson(jsonResult);
-    } on Exception {
-      rethrow;
-    }
-  }
-
-  Future<void> update(List<Character> characters) async {
-    await Future.wait(
-      characters.map((char) async {
-        final epi = await get(char.episodes.first);
-        char.firtsEpisode = epi;
-      }).toList(),
-    );
+    final jsonResult = await api.getMap(url);
+    return Episode.fromJson(jsonResult);
   }
 }
