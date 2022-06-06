@@ -122,7 +122,8 @@ class Character extends Equatable {
         episodes,
         url,
         created,
-        favorite
+        favorite,
+        firtsEpisode,
       ];
 }
 

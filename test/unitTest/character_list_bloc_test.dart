@@ -39,15 +39,16 @@ void main() {
   blocTest<CharacterListBloc, CharacterListState>(
       'debería buscar la siguiente pagina si evento CharacterFetched ',
       build: () => CharacterListBloc(mockCharcaterRepo, mockEpisodeRepo),
-      setUp: () {
+      setUp: () async {
         final response = characterReponsePage1;
         final episodes = [episode1, episode1];
 
         when(() => mockCharcaterRepo.getAllWithInfo(any()))
             .thenAnswer((_) async => response);
         when(() => mockEpisodeRepo.get(any())).thenAnswer((_) async {
-          final epi = episodes.removeAt(0);
-          return epi;
+          final epi = episodes.first;
+          episodes.removeAt(0);
+          return Future.value(epi);
         });
       },
       act: (bloc) {

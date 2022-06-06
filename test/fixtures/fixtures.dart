@@ -52,6 +52,7 @@ final character1 = Character(
   ],
   url: "https://rickandmortyapi.com/api/character/1",
   created: DateTime(2017, 11, 04, 18, 48, 46),
+  firtsEpisode: episode1,
 );
 final character2 = Character(
   id: 2,
@@ -75,6 +76,7 @@ final character2 = Character(
   ],
   url: "https://rickandmortyapi.com/api/character/2",
   created: DateTime(2017, 11, 04, 18, 50, 21),
+  firtsEpisode: episode1,
 );
 
 final episode1 = Episode(

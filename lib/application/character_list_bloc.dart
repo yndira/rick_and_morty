@@ -5,6 +5,7 @@ import 'package:rick_and_morty/domain/info_response.dart';
 import 'package:rick_and_morty/services/endpoint.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../domain/Episode.dart';
 import '../domain/character.dart';
 import '../repositories/character_repository.dart';
 import '../repositories/episode_repository.dart';
@@ -90,10 +91,12 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
         final response = await characterRepo.getAllWithInfo(nextUrl);
         final characters = response.results;
 
-        await Future.wait(characters.map((char) async {
-          final epi = await episodeRepo.get(char.episodes.first);
-          char.firtsEpisode = epi;
-        }).toList());
+        await Future.wait(
+          characters.map((char) async {
+            final epi = await episodeRepo.get(char.episodes.first);
+            char.firtsEpisode = epi;
+          }).toList(),
+        );
 
         emit(state.copyWith(
           info: response.info,

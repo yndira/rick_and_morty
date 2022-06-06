@@ -13,7 +13,7 @@ class EpisodeRepository {
     try {
       final jsonResult = await api.getMap(url);
       return EpisodeResponse.fromJson(jsonResult);
-    } on Exception  {
+    } on Exception {
       rethrow;
     }
   }
@@ -27,4 +27,12 @@ class EpisodeRepository {
     }
   }
 
+  Future<void> update(List<Character> characters) async {
+    await Future.wait(
+      characters.map((char) async {
+        final epi = await get(char.episodes.first);
+        char.firtsEpisode = epi;
+      }).toList(),
+    );
+  }
 }
