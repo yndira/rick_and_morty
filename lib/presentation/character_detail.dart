@@ -48,8 +48,8 @@ class CharacterDetail extends StatelessWidget {
           SliverAppBar(
             automaticallyImplyLeading: true,
             pinned: true,
-            expandedHeight: 150.0,
-            collapsedHeight: 150.0,
+            expandedHeight: 100.0,
+            collapsedHeight: 100.0,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               expandedTitleScale: 1,

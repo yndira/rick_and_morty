@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/application/character_list_bloc.dart';
 import 'package:rick_and_morty/presentation/character_list.dart';
@@ -9,7 +10,14 @@ import 'package:rick_and_morty/theme_data.dart';
 
 import 'application/simple_bloc_observer.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   BlocOverrides.runZoned(
     () {
       runApp(const MyApp());
