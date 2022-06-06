@@ -32,7 +32,7 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
       (event, emit) async {
         await _onNameChanged(event, emit);
       },
-      transformer: debounceTransformer(const Duration(milliseconds: 500)),
+      transformer: debounceTransformer(const Duration(milliseconds: 200)),
     );
     on<StatusChecked>(_onStatusChanged);
     on<GenderChecked>(_onGenderChanged);
@@ -89,13 +89,6 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
       if (nextUrl != null) {
         final response = await characterRepo.getAllWithInfo(nextUrl);
         final characters = response.results;
-
-        // await Future.wait(
-        //   characters.map((char) async {
-        //     final epi = await episodeRepo.get(char.episodes.first);
-        //     char.firtsEpisode = epi;
-        //   }).toList(),
-        // );
 
         await Future.forEach(characters, (Character char) async {
           char.firtsEpisode = await episodeRepo.get(char.episodes.first);

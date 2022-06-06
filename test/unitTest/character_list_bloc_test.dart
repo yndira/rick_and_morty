@@ -39,7 +39,7 @@ void main() {
   blocTest<CharacterListBloc, CharacterListState>(
       'debería buscar la siguiente pagina si evento CharacterFetched ',
       build: () => CharacterListBloc(mockCharcaterRepo, mockEpisodeRepo),
-      setUp: () async {
+      setUp: () {
         final response = characterReponsePage1;
         final episodes = [episode1, episode1];
 
@@ -54,6 +54,7 @@ void main() {
       act: (bloc) {
         bloc.add(CharacterListEvent.characterFetched());
       },
+      wait: const Duration(milliseconds: 200),
       expect: () {
         final infoExpected = infoResponsePage1;
         final charactersExpected = characters;
@@ -85,6 +86,7 @@ void main() {
       act: (bloc) {
         bloc.add(const CharacterListEvent.nameChanged("rick"));
       },
+      wait: const Duration(milliseconds: 200),
       expect: () {
         final infoExpected = infoResponsePage1WithName;
         final charactersExpected = [character1];
