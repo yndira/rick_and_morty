@@ -1,3 +1,5 @@
+import 'package:rick_and_morty/domain/character.dart';
+
 import '../domain/Episode.dart';
 import '../domain/episode_response.dart';
 import '../services/api_service.dart';
@@ -24,4 +26,5 @@ class EpisodeRepository {
       rethrow;
     }
   }
+
 }
