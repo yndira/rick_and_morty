@@ -46,7 +46,7 @@ final character1 = Character(
       name: "Citadel of Ricks",
       url: "https://rickandmortyapi.com/api/location/3"),
   image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  episodes: [
+  episodes: const [
     "https://rickandmortyapi.com/api/episode/1",
     "https://rickandmortyapi.com/api/episode/2",
   ],
@@ -54,6 +54,7 @@ final character1 = Character(
   created: DateTime(2017, 11, 04, 18, 48, 46),
   firtsEpisode: episode1,
 );
+
 final character2 = Character(
   id: 2,
   name: "Morty Smith",
@@ -70,7 +71,7 @@ final character2 = Character(
     url: "https://rickandmortyapi.com/api/location/3",
   ),
   image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-  episodes: [
+  episodes: const [
     "https://rickandmortyapi.com/api/episode/1",
     "https://rickandmortyapi.com/api/episode/2",
   ],
@@ -79,11 +80,44 @@ final character2 = Character(
   firtsEpisode: episode1,
 );
 
+final character3 = Character(
+  id: 3,
+  name: "Alan Michael",
+  status: Status.Alive,
+  species: "Human",
+  type: "",
+  gender: Gender.Male,
+  origin: Location(
+    url: "",
+    name: "unknown",
+  ),
+  location: Location(
+    name: "Citadel of Ricks",
+    url: "https://rickandmortyapi.com/api/location/3",
+  ),
+  image: "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+  episodes: const [
+    "https://rickandmortyapi.com/api/episode/1",
+  ],
+  url: "https://rickandmortyapi.com/api/character/3",
+  created: DateTime(2017, 11, 04, 25, 50, 21),
+  firtsEpisode: episode1,
+);
+
 final episode1 = Episode(
   name: "Episode 1",
   airDate: "",
   episode: "",
-  characters: [],
+  characters: const [],
   url: "",
   created: DateTime(2017, 11, 04, 18, 50, 21),
+);
+
+final episode2 = Episode(
+  name: "Episode 2",
+  airDate: "",
+  episode: "",
+  characters: const [],
+  url: "",
+  created: DateTime(2017, 11, 04, 20, 50, 21),
 );

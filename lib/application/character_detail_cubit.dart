@@ -58,7 +58,7 @@ class CharacterDetailCubit extends Cubit<CharacterDetailState> {
   Future<List<Episode>> _loadEpisodes(bool first) async {
     final episodes = List<Episode>.from(state.episodes);
 
-    var fetch = first
+    final fetch = first
         ? state.character.episodes.take(4)
         : state.character.episodes.getRange(4, state.character.episodes.length);
 

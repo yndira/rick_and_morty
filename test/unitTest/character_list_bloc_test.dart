@@ -52,7 +52,7 @@ void main() {
         });
       },
       act: (bloc) {
-        bloc.add(const CharacterListEvent.characterFetched());
+        bloc.add(CharacterListEvent.characterFetched());
       },
       expect: () {
         final infoExpected = infoResponsePage1;
